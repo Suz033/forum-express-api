@@ -1,4 +1,4 @@
-<div class="container d-flex justify-content-center">
+<div class="col-md-12 d-flex justify-content-center">
   <div class="card" style="width: 50rem;">
     <div class="d-flex align-items-center">
       <div>
@@ -7,36 +7,124 @@
       <div class="card-body">
         <h5 class="card-title">{{user.name}}</h5>
         <p class="card-text">{{user.email}}</p>
-        <a href="/users/{{user.id}}/edit" class="card-link btn btn-primary">edit</a>
+        <h6 class="card-text">{{comments.length}} 間已評論餐廳</h6>
+        <h6>{{user.FavoritedRestaurants.length}} 收藏的餐廳</h6>
+        <h6>{{user.Followings.length}} followings (追蹤者)</h6>
+        <h6>{{user.Followers.length}} followers (追蹤者)</h6>
+        <a href="/users/{{user.id}}/edit" class="card-link btn btn-primary mt-3">edit</a>
       </div>
     </div>
   </div>
 </div>
 
-<div class="container mt-3 d-flex justify-content-center">
-  <div class="card" style="width: 50rem;">
-    <div class="card-header">
-      {{user.Comments.length}} 已評論餐廳
-    </div>    
-    <div class="card-body d-flex flex-wrap">
-      {{#if user.Comments}}
-      {{#each user.Comments}}
-      <div class="col-2 m-2">
-        <a href="/restaurants/{{this.Restaurant.id}}">
-          <img src="{{this.Restaurant.image}}" alt="restaurant image" class="img-fluid">      
-        </a>
+<div class="col-md-12 d-flex justify-content-center">
+  <div class="col-md-4">
+    <div class=" mt-3 d-flex justify-content-center">
+      <div class="card" style="width: 50rem;">
+        <div class="card-header">
+          {{user.Followings.length}} followings (追蹤者)
+        </div>    
+        <div class="card-body d-flex flex-wrap">
+          {{#if user.Followings}}
+          {{#each user.Followings}}
+          <div class="col-4 m-2">
+            <a href="/users/{{this.id}}">
+              <img src="{{#if this.image}}{{this.image}}{{else}}https://cdn-icons-png.flaticon.com/512/5234/5234205.png{{/if}}" alt="user image" class="img-fluid">      
+            </a>
+          </div>
+          {{/each}}
+          {{else}}
+          <div class="card-body">
+            <p class="card-text">
+              尚無追蹤者
+            </p>
+          </div>
+          {{/if}}
+        </div>
       </div>
-      {{/each}}
-      {{else}}
-      <div class="card-body">
-        <p class="card-text">
-          尚無評論，想要新增評論？ 
-          <a href="/restaurants">
-            前往餐廳
-          </a>
-        </p>
+    </div>
+
+    <div class=" mt-3 d-flex justify-content-center">
+      <div class="card" style="width: 50rem;">
+        <div class="card-header">
+          {{user.Followers.length}} followers (追隨者)
+        </div>
+        <div class="card-body d-flex flex-wrap">
+          {{#if user.Followers}}
+          {{#each user.Followers}}
+          <div class="col-4 m-2">
+            <a href="/users/{{this.id}}">
+              <img src="{{#if this.image}}{{this.image}}{{else}}https://cdn-icons-png.flaticon.com/512/5234/5234205.png{{/if}}" alt="user image" class="img-fluid">
+            </a>
+          </div>
+          {{/each}}
+          {{else}}
+          <div class="card-body">
+            <p class="card-text">
+              尚無追隨者
+            </p>
+          </div>
+          {{/if}}
+        </div>
       </div>
-      {{/if}}
+    </div>
+  </div>
+
+  <div class="col-md-8">
+    <div class="container mt-3 d-flex justify-content-center">
+      <div class="card" style="width: 50rem;">
+        <div class="card-header">
+          {{comments.length}} 已評論餐廳
+        </div>    
+        <div class="card-body d-flex flex-wrap">
+          {{#if comments}}
+          {{#each comments}}
+          <div class="col-2 m-2">
+            <a href="/restaurants/{{this.Restaurant.id}}">
+              <img src="{{this.Restaurant.image}}" alt="restaurant image" class="img-fluid">      
+            </a>
+          </div>
+          {{/each}}
+          {{else}}
+          <div class="card-body">
+            <p class="card-text">
+              尚無評論，想要新增評論？ 
+              <a href="/restaurants">
+                前往餐廳
+              </a>
+            </p>
+          </div>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+
+    <div class="container mt-3 d-flex justify-content-center">
+      <div class="card" style="width: 50rem;">
+        <div class="card-header">
+          {{user.FavoritedRestaurants.length}} 收藏的餐廳
+        </div>    
+        <div class="card-body d-flex flex-wrap">
+          {{#if user.FavoritedRestaurants}}
+          {{#each user.FavoritedRestaurants}}
+          <div class="col-2 m-2">
+            <a href="/restaurants/{{this.id}}">
+              <img src="{{this.image}}" alt="restaurant image" class="img-fluid">      
+            </a>
+          </div>
+          {{/each}}
+          {{else}}
+          <div class="card-body">
+            <p class="card-text">
+              尚無收藏，想要新增收藏？ 
+              <a href="/restaurants">
+                前往餐廳
+              </a>
+            </p>
+          </div>
+          {{/if}}
+        </div>
+      </div>
     </div>
   </div>
 </div>
