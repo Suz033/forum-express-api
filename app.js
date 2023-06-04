@@ -1,7 +1,7 @@
 // modules
 const express = require('express')
 const handlebars = require('express-handlebars')
-const routes = require('./routes')
+const { pages } = require('./routes')
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
@@ -14,7 +14,7 @@ const methodOverride = require('method-override')
 const path = require('path')
 
 const app = express()
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 4000
 const SESSION_SECRET = 'secret'
 
 app.engine('hbs', handlebars({ extname: '.hbs', helpers: handlebarsHelpers }))
@@ -32,7 +32,7 @@ app.use((req, res, next) => {
   res.locals.user = getUser(req)
   next()
 })
-app.use(routes)
+app.use(pages)
 
 // listener
 app.listen(port, () => {

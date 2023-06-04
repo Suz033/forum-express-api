@@ -1,5 +1,5 @@
 // files
-const { Category } = require('../models')
+const { Category } = require('../../models')
 
 // controllers
 const categoryController = {
